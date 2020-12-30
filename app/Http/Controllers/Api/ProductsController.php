@@ -55,4 +55,26 @@ class ProductsController extends Controller
             'message' => 'Products have been deleted'
         ], 202);
     }
+
+    public function updateProductAmount(int $id)
+    {
+        $response = Http::get('https://ecom-storage-system-b5qi2.ondigitalocean.app/api/products/' . $id . '/amount');
+        $body = json_decode($response->getBody()->getContents(), true);
+
+        if (Product::where('id', $id)->exists() && $body['amount']) {
+            $product = Product::find($id);
+
+            $product->amount = $body['amount'];
+            $product->save();
+
+            return response()->json([
+                'amount' => $body['amount'],
+                'message' => 'Product amount updated successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Product not found'
+            ], 404);
+        }
+    }
 }

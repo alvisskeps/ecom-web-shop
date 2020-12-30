@@ -14,6 +14,7 @@
                         <p class="card-text">{{ product.description }}</p>
                         <p><b>Price: </b>{{ product.price }}</p>
                         <p><b>Amount: </b>{{ product.amount }}</p>
+                        <button class="btn btn-primary" @click="updateAmount(product)">Update amount</button>
                     </div>
                 </div>
             </div>
@@ -40,7 +41,7 @@
             },
             syncProducts() {
                 axios
-                    .get('api/sync-products')
+                    .get('api/products/sync')
                     .then(response => {
                         this.products = response.data;
                     });
@@ -51,6 +52,14 @@
                     .then(response => {
                         alert(response.data.message);
                         this.products = [];
+                    });
+            },
+            updateAmount(product) {
+                axios
+                    .put(`api/products/${product.id}/amount`)
+                    .then(response => {
+                        product.amount = response.data.amount;
+                        alert(response.data.message);
                     });
             }
         }
