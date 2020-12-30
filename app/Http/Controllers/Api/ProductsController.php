@@ -61,7 +61,7 @@ class ProductsController extends Controller
         $response = Http::get('https://ecom-storage-system-b5qi2.ondigitalocean.app/api/products/' . $id . '/amount');
         $body = json_decode($response->getBody()->getContents(), true);
 
-        if (Product::where('id', $id)->exists() && $body['amount']) {
+        if (Product::where('id', $id)->exists() && isset($body['amount'])) {
             $product = Product::find($id);
 
             $product->amount = $body['amount'];
