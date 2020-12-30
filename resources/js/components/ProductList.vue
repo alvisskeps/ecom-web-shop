@@ -58,7 +58,10 @@
                 axios
                     .put(`api/products/${product.id}/amount`)
                     .then(response => {
-                        product.amount = response.data.amount;
+                        if (response.data.amount) {
+                            product.amount = response.data.amount;
+                        }
+
                         alert(response.data.message);
                     });
             }
