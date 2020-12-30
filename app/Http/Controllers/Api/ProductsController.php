@@ -46,4 +46,13 @@ class ProductsController extends Controller
 
         return response($products, 200);
     }
+
+    public function deleteAllProducts()
+    {
+        Product::truncate();
+
+        return response()->json([
+            'message' => 'Products have been deleted'
+        ], 202);
+    }
 }

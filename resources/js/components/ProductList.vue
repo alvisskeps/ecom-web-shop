@@ -3,6 +3,7 @@
         <div class="row mt-5">
             <div class="col-12">
                 <button class="btn btn-success mx-2" @click="syncProducts()">Sync products</button>
+                <button v-if="products.length" class="btn btn-danger mx-2" @click="deleteProducts()">Delete all products</button>
             </div>
         </div>
         <div class="row no-gutters my-5">
@@ -42,6 +43,14 @@
                     .get('api/sync-products')
                     .then(response => {
                         this.products = response.data;
+                    });
+            },
+            deleteProducts() {
+                axios
+                    .delete('api/products')
+                    .then(response => {
+                        alert(response.data.message);
+                        this.products = [];
                     });
             }
         }

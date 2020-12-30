@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('products', [ProductsController::class, 'getAllProducts']);
 Route::get('sync-products', [ProductsController::class, 'syncProducts']);
+Route::delete('products', [ProductsController::class, 'deleteAllProducts']);
