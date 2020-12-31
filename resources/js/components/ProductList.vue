@@ -63,6 +63,9 @@
                         }
 
                         alert(response.data.message);
+                    })
+                    .catch(err => {
+                        alert(err.response.data.message);
                     });
             }
         }
